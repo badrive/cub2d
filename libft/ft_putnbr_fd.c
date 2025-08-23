@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/11/05 19:03:45 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/20 16:24:47 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
-
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "libft.h"
 #include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
 
-int	validate_args(int ac, char **av);
-
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (fd < 0)
+		return ;
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		n *= -1;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+	}
+	n = n % 10 + 48;
+	write(fd, &n, 1);
+}

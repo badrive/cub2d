@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 12:04:17 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/23 14:09:14 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main (int ac, char **av)
 {
-    (void)ac;
-    (void)av;
-    return 0;
+	if (!validate_args(ac, av))
+		return (1);
+
+    return (0);
 }

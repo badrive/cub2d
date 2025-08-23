@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/11/05 12:22:41 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/15 14:54:32 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	size_t	i;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	i = 0;
+	if (s == NULL || (*f) == NULL)
+		return ;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
+}

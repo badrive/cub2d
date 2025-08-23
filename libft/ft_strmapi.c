@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/11/05 10:36:29 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/15 15:26:55 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	size_t	len;
+	size_t	i;
+	char	*str;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	if (!s || !(*f))
+		return (NULL);
+	i = 0;
+	len = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(str))
+		return (0);
+	while (i < len)
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

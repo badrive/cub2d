@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/10/28 09:59:31 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/12 09:13:13 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	j;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	i = 0;
+	if (!needle[i])
+		return ((char *)haystack);
+	while (haystack[i] != '\0' && i < len)
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && (i + j) < len
+			&& needle[j] != '\0')
+		{
+			j++;
+		}
+		if (needle[j] == '\0')
+			return ((char *)haystack + i);
+		i++;
+	}
+	return (0);
+}

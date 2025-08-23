@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/11/15 10:13:48 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/16 15:27:57 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	i = 0;
+	if (fd < 0 || s == NULL)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}

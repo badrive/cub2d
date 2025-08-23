@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/10/26 17:34:34 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/12 13:52:45 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	uc;
+	int				i;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	uc = (unsigned char)c;
+	i = 0;
+	while (s[i])
+	{
+		if ((unsigned char)s[i] == uc)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (uc == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
+}

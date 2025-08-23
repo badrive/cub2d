@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:09 by bfaras           ###   ########.fr       */
+/*   Created: 2024/10/28 13:18:59 by bfaras            #+#    #+#             */
+/*   Updated: 2024/11/20 23:40:13 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "libft.h"
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/time.h>
-#include <math.h>
-// #include <mlx.h>
+int	ft_atoi(const char *str)
+{
+	int		one;
+	long	result;
+	int		nb;
+	int		j;
 
-int	validate_args(int ac, char **av);
-
-#endif
+	one = 1;
+	result = 0;
+	nb = 0;
+	j = 0;
+	while ((str[j] >= 9 && str[j] <= 13) || (str[j] == 32))
+		j++;
+	if (str[j] == '-')
+		one *= -1;
+	if (str[j] == '+' || str[j] == '-')
+		j++;
+	while (str[j] >= '0' && str[j] <= '9')
+	{
+		nb = (str[j] - 48);
+		result = result * 10 + nb;
+		j++;
+	}
+	return (result * one);
+}
