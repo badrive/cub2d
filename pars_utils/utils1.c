@@ -6,8 +6,21 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:08:44 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/23 15:45:05 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void	ft_error(void)
+{
+	write(2, "Error\n", 6);
+	ft_malloc(0);
+	exit(1);
+}
+
+void	ft_exit(void)
+{
+	ft_malloc(0);
+	exit(1);
+}

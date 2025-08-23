@@ -1,13 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils0.c                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:08:42 by bfaras           ###   ########.fr       */
+/*   Created: 2025/03/23 13:47:49 by bfaras            #+#    #+#             */
+/*   Updated: 2025/08/23 15:51:56 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
+
+#endif

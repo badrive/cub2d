@@ -6,11 +6,12 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:38:50 by bfaras            #+#    #+#             */
-/*   Updated: 2024/11/20 17:02:36 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/23 16:05:19 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../pars_utils/parsing.h"
 
 int	count_word(const char *s, char c)
 {
@@ -85,7 +86,7 @@ char	**ft_split(const char *s, char c)
 	if (!s)
 		return (NULL);
 	count = count_word(s, c);
-	ptr = (char **)malloc(sizeof(char *) * (count + 1));
+	ptr = (char **)ft_malloc(sizeof(char *) * (count + 1));
 	if (!ptr)
 		return (NULL);
 	if (count == 0)

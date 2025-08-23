@@ -7,7 +7,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror #-g3 
 
-SRCS = main.c $(wildcard pars_utils/*.c)
+SRCS = main.c $(wildcard pars_utils/*.c) $(wildcard get_next_line/*.c)
 
 OBJS = $(SRCS:.c=.o)
 
