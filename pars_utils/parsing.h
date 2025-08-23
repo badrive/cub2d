@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 12:04:17 by bfaras           ###   ########.fr       */
+/*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
+/*   Updated: 2025/08/23 12:02:55 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pars_utils/parsing.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int main (int ac, char **av)
-{
-    (void)ac;
-    (void)av;
-    return 0;
-}
+# include <limits.h>
+# include <stdarg.h>
+# include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+
+#endif
