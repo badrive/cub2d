@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 22:07:00 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 16:04:29 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 17:14:36 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *s1)
 	while (s1[i])
 		i++;
 	i++;
-	dest = ft_malloc(i * sizeof(char));
+	dest = malloc(i * sizeof(char));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 15:45:15 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 16:57:32 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	allocate_map(t_data *game);
 int	    ft_allocate_map_line(t_data *game, char *line, int i);
 void	read_map(t_data *game, const char *map_file);
 void	validate_map_dimensions(t_data *game);
-void	ft_error(void);
-void	ft_exit(void);
+void	ft_error(t_data *game, char *error);
+void	ft_exit(t_data *game);
+void	ft_free(t_data *game);
 #endif

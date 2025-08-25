@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 10:24:37 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 16:05:36 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 17:14:40 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	result = (char *)ft_malloc(len);
+	result = (char *)malloc(len);
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, s1, len);

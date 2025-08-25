@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 16:13:06 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 17:14:02 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ int main (int ac, char **av)
 	if (!validate_args(ac, av))
 		return (1);
 
-    game = ft_malloc(sizeof(t_data));
+    game = malloc(sizeof(t_data));
 	if (!game)
 		return (1);
 
     init_game(game);
-
     load_map(game, av[1]);
-    printf("hello\n");
-    ft_malloc(0);
-    printf("hello2\n");
+    ft_free(game);
     return (0);
 }

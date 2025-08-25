@@ -6,21 +6,61 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 15:45:05 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 17:35:14 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	ft_error(void)
+void	ft_error(t_data *game, char *error)
 {
-	write(2, "Error\n", 6);
-	ft_malloc(0);
+	ft_putstr_fd("Error\n",2);
+	ft_putstr_fd(error,2);
+	write(2,"\n",1);
+	ft_free(game);
 	exit(1);
 }
 
-void	ft_exit(void)
+void	ft_exit(t_data *game)
 {
-	ft_malloc(0);
+	ft_free(game);
 	exit(1);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+	{
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	ft_free(t_data *game)
+{
+	int	i;
+
+	if (game->map)
+	{
+		i = 0;
+		while (game->map[i])
+			free(game->map[i++]);
+		free(game->map);
+		game->map = NULL;
+	}
+	if (game->map_clone)
+	{
+		i = 0;
+		while (game->map_clone[i])
+			free(game->map_clone[i++]);
+		free(game->map_clone);
+		game->map_clone = NULL;
+	}
+	// ft_free_mlx(game);
+	free(game);
 }

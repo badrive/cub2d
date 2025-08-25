@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 14:41:56 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/23 14:44:12 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/25 16:09:07 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,29 @@ void	ie_free(t_save **head)
 	}
 }
 
-void	*ft_malloc(size_t size)
+void *ft_malloc(size_t size)
 {
-	void			*add;
-	static t_save	*head;
-
-	if (size == 0)
-	{
-		ie_free(&head);
-		return (NULL);
-	}
-	add = malloc(size);
-	if (!add)
-		return (0);
-	head = malloc(sizeof(t_save));
-	if (!head)
-		return (0);
-	head->add = add;
-	head->next = *save_add();
-	*save_add() = head;
-	return (add);
+    void *add;
+    t_save *new_node;
+    
+    if (size == 0)
+    {
+        t_save **head = save_add();
+        ie_free(head);
+        return (NULL);
+    }
+    add = malloc(size);
+    if (!add)
+        return (NULL);
+    new_node = malloc(sizeof(t_save));
+    if (!new_node)
+    {
+        free(add);
+        return (NULL);
+    }
+    new_node->add = add;
+    new_node->next = *save_add();
+    *save_add() = new_node;
+    
+    return (add);
 }
