@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/25 16:57:32 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/26 15:24:09 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@
 
 typedef struct      s_data
 {
-    char	**map;
+	char	**map;
 	char	**map_clone;
 	int		map_width;
 	int		map_height;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*f_tmp;
+	char	*c_tmp;
+	int		f;
+	int		c;
 }                   t_data;
 
 
@@ -51,4 +59,5 @@ void	validate_map_dimensions(t_data *game);
 void	ft_error(t_data *game, char *error);
 void	ft_exit(t_data *game);
 void	ft_free(t_data *game);
+void	ft_check_elm(t_data *game);
 #endif
