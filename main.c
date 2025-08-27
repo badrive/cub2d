@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/26 16:00:17 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/26 17:16:32 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int main (int ac, char **av)
     printf("---%s---\n", game->so);
     printf("---%s---\n", game->we);
     printf("---%s---\n", game->ea);
+    printf("---%s---\n", game->f_tmp);
+    printf("---%s---\n", game->c_tmp);
     ft_free(game);
     return (0);
 }
