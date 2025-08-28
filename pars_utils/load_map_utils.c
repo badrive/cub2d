@@ -37,8 +37,8 @@ void	calculate_map_height(t_data *game, const char *map_file)
 
 void	allocate_map(t_data *game)
 {
-	game->map = malloc(sizeof(char *) * (game->map_height + 1));
-	if (!game->map)
+	game->file = malloc(sizeof(char *) * (game->map_height + 1));
+	if (!game->file)
 		ft_exit(game);
 	game->map_clone = malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->map_clone)
@@ -47,14 +47,14 @@ void	allocate_map(t_data *game)
 
 int	ft_allocate_map_line(t_data *game, char *line, int i)
 {
-	game->map[i] = ft_strdup(line);
+	game->file[i] = ft_strdup(line);
 	game->map_clone[i] = ft_strdup(line);
-	if (!game->map[i] || !game->map_clone[i])
+	if (!game->file[i] || !game->map_clone[i])
 	{
 		while (i >= 0)
 		{
-			if (game->map[i])
-				free(game->map[i]);
+			if (game->file[i])
+				free(game->file[i]);
 			if (game->map_clone[i])
 				free(game->map_clone[i]);
 			i--;
@@ -86,16 +86,16 @@ void	read_map(t_data *game, const char *map_file)
 		line = get_next_line(fd);
 		i++;
 	}
-	game->map[i] = NULL;
+	game->file[i] = NULL;
 	game->map_clone[i] = NULL;
 }
 
 void	validate_map_dimensions(t_data *game)
 {
-	if (!game || !game->map || !game->map[0])
+	if (!game || !game->file || !game->file[0])
         ft_error(game, "Invalid game data or map");
-	game->map_width = ft_strlen(game->map[0]);
-	if (game->map[0][game->map_width - 1] == '\n')
+	game->map_width = ft_strlen(game->file[0]);
+	if (game->file[0][game->map_width - 1] == '\n')
 		game->map_width--;
 	if (game->map_width <= 0 || game->map_height <= 0)
 		ft_error(game, "Invalid map dimensions");

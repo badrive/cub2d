@@ -14,6 +14,7 @@
 
 void    init_game(t_data	*game)
 {
+    game->file = NULL;
     game->map = NULL;
     game->map_clone = NULL;
     game->map_width = 0;
@@ -26,6 +27,12 @@ void    init_game(t_data	*game)
 	game->c_tmp = NULL;
 	game->f = 0;
 	game->c = 0;
+    game->sign.no = 0;
+    game->sign.so = 0;
+    game->sign.we = 0;
+    game->sign.ea = 0;
+    game->sign.f = 0;
+    game->sign.c = 0;
 }
 
 int main (int ac, char **av)
@@ -48,6 +55,8 @@ int main (int ac, char **av)
     printf("---%s---\n", game->ea);
     printf("---%s---\n", game->f_tmp);
     printf("---%s---\n", game->c_tmp);
+    printf("---MAP---\n");
+    // printf("---%s---\n", game->map[2]);
     ft_free(game);
     return (0);
 }

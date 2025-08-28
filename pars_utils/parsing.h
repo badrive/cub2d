@@ -25,8 +25,19 @@
 #include <math.h>
 // #include <mlx.h>
 
+typedef	struct 		s_sign
+{
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+}					t_sign;
+
 typedef struct      s_data
 {
+	char	**file;
 	char	**map;
 	char	**map_clone;
 	int		map_width;
@@ -39,6 +50,7 @@ typedef struct      s_data
 	char	*c_tmp;
 	int		f;
 	int		c;
+	t_sign	sign;
 }                   t_data;
 
 

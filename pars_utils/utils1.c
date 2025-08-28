@@ -45,13 +45,13 @@ void	ft_free(t_data *game)
 {
 	int	i;
 
-	if (game->map)
+	if (game->file)
 	{
 		i = 0;
-		while (game->map[i])
-			free(game->map[i++]);
-		free(game->map);
-		game->map = NULL;
+		while (game->file[i])
+			free(game->file[i++]);
+		free(game->file);
+		game->file = NULL;
 	}
 	if (game->map_clone)
 	{
