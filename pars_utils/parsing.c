@@ -6,11 +6,32 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/26 18:57:53 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/29 18:35:38 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void ft_check_map(t_data *game)
+{
+    int i, j;
+    i = 0;
+    while (game->map[i])
+    {
+        j = 0;
+        while (game->map[i][j])
+        {
+            if (game->map[i][j] == '0' || game->map[i][j] == 'N' || 
+                game->map[i][j] == 'S' || game->map[i][j] == 'W' || 
+                game->map[i][j] == 'E')
+            {
+                flood_fill(game, i, j, game->map);
+            }
+            j++;
+        }
+        i++;
+    }
+}
 
 int	validate_args(int ac, char **av)
 {
@@ -29,9 +50,9 @@ int	validate_args(int ac, char **av)
 
 void	load_map(t_data *game, const char *map_file)
 {
-	calculate_map_height(game, map_file);
-	allocate_map(game);
-	read_map(game, map_file);
+	calculate_file_height(game, map_file);
+	allocate_file(game);
+	read_file(game, map_file);
 	// validate_map_dimensions(game);
 }
 
@@ -60,7 +81,7 @@ void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 	}
 	end = j;
 	j = 0;
-	tmp = malloc((end - start));
+	tmp = malloc((end - start)+ 1);
 	while (start < end)
 	{
 		tmp[j] = game->file[i][start];
@@ -81,14 +102,7 @@ void		ft_rgbit(t_data *game, char *str)
 	r = 0;
 	g = 0;
 	b = 0;
-	// len = ft_stlen(str);
-	// tmp = malloc(len);
-	// while (str[i])
-	// {
-	// 	if (str[i] != ',')
-	// 		tmp[]
-	// 	i++;
-	// }
+
 	int	i = 0;
 	int	comma = 0;
 	while(str[i])
@@ -106,7 +120,16 @@ void		ft_rgbit(t_data *game, char *str)
 	while (tmp[i])
 		i++;
 	if (i != 3)
+	{
+		i = 0;
+        while (tmp[i])
+        {
+            free(tmp[i]);
+            i++;
+        }
+        free(tmp);
 		ft_error(game, "Invalid R.G.B");
+	}
 	r = ft_atoi(tmp[0]);
 	if (r < 0 || r > 255)
 		ft_error(game, "Invalid R.G.B");
@@ -116,8 +139,15 @@ void		ft_rgbit(t_data *game, char *str)
 	b = ft_atoi(tmp[2]);
 	if (b < 0 || b > 255)
 		ft_error(game, "Invalid R.G.B");
-	printf("%d\n",b);
+	i = 0;
+    while (tmp[i])
+    {
+        free(tmp[i]);
+        i++;
+    }
+    free(tmp);
 }
+
 void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign)
 {
 	char	*tmp;
@@ -143,7 +173,7 @@ void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign)
 	}
 	end = j;
 	j = 0;
-	tmp = malloc((end - start));
+	tmp = malloc((end - start)+ 1);
 	while (start < end)
 	{
 		tmp[j] = game->file[i][start];
@@ -168,19 +198,24 @@ void ft_dup_map(t_data *game, int start)
 {
     int i, size;
     
-	i = 0;
+    i = 0;
     size = game->map_height - start;
-	int end = game->map_height;
-		printf("---gg---\n");
     game->map = malloc(sizeof(char*) * (size + 1));
     if (!game->map)
-	{
         return;
-	}
-	printf("---gg---\n");
-    while (start < end)
+    
+    while (start < game->map_height)
     {
-        game->map[i] = game->file[start];
+        game->map[i] = ft_strdup(game->file[start]); // ← FIX: Duplicate the string
+        if (!game->map[i]) // ← Add error checking
+        {
+            // Clean up on failure
+            while (--i >= 0)
+                free(game->map[i]);
+            free(game->map);
+            game->map = NULL;
+            ft_error(game, "Memory allocation failed");
+        }
         i++;
         start++;
     }
@@ -208,15 +243,15 @@ void	ft_check_elm(t_data *game)
 			if (game->file[i][j] == 'N' && game->file[i][j+1] == 'O')
 				ft_dup_path( game, &game->no,i, j, &game->sign.no);
 			else if (game->file[i][j] == 'S' && game->file[i][j+1] == 'O')
-			ft_dup_path( game, &game->so, i, j, &game->sign.so);
+				ft_dup_path( game, &game->so, i, j, &game->sign.so);
 			else if (game->file[i][j] == 'W' && game->file[i][j+1] == 'E')
-			ft_dup_path( game, &game->we, i, j, &game->sign.we);
+				ft_dup_path( game, &game->we, i, j, &game->sign.we);
 			else if (game->file[i][j] == 'E' && game->file[i][j+1] == 'A')
-			ft_dup_path( game, &game->ea, i, j, &game->sign.ea);
+				ft_dup_path( game, &game->ea, i, j, &game->sign.ea);
 			else if	(game->file[i][j] == 'F')
-			ft_dup_color( game, &game->f_tmp, i, j, &game->sign.f);
+				ft_dup_color( game, &game->f_tmp, i, j, &game->sign.f);
 			else if	(game->file[i][j] == 'C')
-			ft_dup_color( game, &game->c_tmp, i, j, &game->sign.c);
+				ft_dup_color( game, &game->c_tmp, i, j, &game->sign.c);
 			else if (game->file[i][j] != '\n' )
 			{
 				printf("---%s---", game->file[i]);

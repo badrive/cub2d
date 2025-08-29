@@ -6,13 +6,13 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/26 13:55:55 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/29 22:23:04 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	calculate_map_height(t_data *game, const char *map_file)
+void	calculate_file_height(t_data *game, const char *map_file)
 {
 	int		fd;
 	char	*line;
@@ -35,36 +35,35 @@ void	calculate_map_height(t_data *game, const char *map_file)
 	close(fd);
 }
 
-void	allocate_map(t_data *game)
+void	allocate_file(t_data *game)
 {
 	game->file = malloc(sizeof(char *) * (game->map_height + 1));
 	if (!game->file)
 		ft_exit(game);
-	game->map_clone = malloc(sizeof(char *) * (game->map_height + 1));
-	if (!game->map_clone)
-		ft_exit(game);
 }
 
-int	ft_allocate_map_line(t_data *game, char *line, int i)
+int ft_allocate_file_line(t_data *game, char *line, int i)
 {
-	game->file[i] = ft_strdup(line);
-	game->map_clone[i] = ft_strdup(line);
-	if (!game->file[i] || !game->map_clone[i])
-	{
-		while (i >= 0)
-		{
-			if (game->file[i])
-				free(game->file[i]);
-			if (game->map_clone[i])
-				free(game->map_clone[i]);
-			i--;
-		}
-		return (0);
-	}
-	return (1);
+    int len = ft_strlen(line);
+
+    if (len > 0 && line[len - 1] == '\n')
+        line[len - 1] = '\0';
+    
+    game->file[i] = ft_strdup(line);
+    if (!game->file[i])
+    {
+        while (i >= 0)
+        {
+            if (game->file[i])
+                free(game->file[i]);
+            i--;
+        }
+        return (0);
+    }
+    return (1);
 }
 
-void	read_map(t_data *game, const char *map_file)
+void	read_file(t_data *game, const char *map_file)
 {
 	char	*line;
 
@@ -76,7 +75,7 @@ void	read_map(t_data *game, const char *map_file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!ft_allocate_map_line(game, line, i))
+		if (!ft_allocate_file_line(game, line, i))
 		{
 			free(line);
 			close(fd);
@@ -87,16 +86,15 @@ void	read_map(t_data *game, const char *map_file)
 		i++;
 	}
 	game->file[i] = NULL;
-	game->map_clone[i] = NULL;
 }
 
-void	validate_map_dimensions(t_data *game)
-{
-	if (!game || !game->file || !game->file[0])
-        ft_error(game, "Invalid game data or map");
-	game->map_width = ft_strlen(game->file[0]);
-	if (game->file[0][game->map_width - 1] == '\n')
-		game->map_width--;
-	if (game->map_width <= 0 || game->map_height <= 0)
-		ft_error(game, "Invalid map dimensions");
-}
+// void	validate_map_dimensions(t_data *game)
+// {
+// 	if (!game || !game->file || !game->file[0])
+//         ft_error(game, "Invalid game data or map");
+// 	game->map_width = ft_strlen(game->file[0]);
+// 	if (game->file[0][game->map_width - 1] == '\n')
+// 		game->map_width--;
+// 	if (game->map_width <= 0 || game->map_height <= 0)
+// 		ft_error(game, "Invalid map dimensions");
+// }

@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/25 17:35:14 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/29 18:00:18 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ void	ft_free(t_data *game)
 {
 	int	i;
 
+	 if (game->no)
+		free(game->no);
+    if (game->so)
+		free(game->so);
+    if (game->we)
+		free(game->we);
+    if (game->ea)
+		free(game->ea);
+    if (game->f_tmp)
+		free(game->f_tmp);
+    if (game->c_tmp)
+		free(game->c_tmp);
 	if (game->file)
 	{
 		i = 0;
@@ -53,13 +65,13 @@ void	ft_free(t_data *game)
 		free(game->file);
 		game->file = NULL;
 	}
-	if (game->map_clone)
+	if (game->map)
 	{
 		i = 0;
-		while (game->map_clone[i])
-			free(game->map_clone[i++]);
-		free(game->map_clone);
-		game->map_clone = NULL;
+		while (game->map[i])
+			free(game->map[i++]);
+		free(game->map);
+		game->map = NULL;
 	}
 	// ft_free_mlx(game);
 	free(game);
