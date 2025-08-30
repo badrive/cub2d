@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:43:15 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/29 22:28:39 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/30 17:22:14 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void validate_map_char(t_data *game)
         i++;
     }
 }
-    
+
 void validate_map_pos(t_data *game)
 {
     int i, j, player_count = 0;
@@ -76,7 +76,6 @@ void validate_map_pos(t_data *game)
             {
                 game->y = i;
                 game->x = j;
-                // Remove the player_dir line - you don't need it
                 player_count++;
             }
             j++;

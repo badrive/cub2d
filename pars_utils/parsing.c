@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/29 18:35:38 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/30 21:37:09 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,24 @@ void	load_map(t_data *game, const char *map_file)
 void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 {
 	char	*tmp;
-	int		(start), (end);
+	char	**splited;
+	int		(start), (end), (index);
 
 	if (*sign != 0)
 		ft_error(game, "Duplicate element");
-	j+= 2;
+	splited = ft_split(game->file[i], ' ');
+	index = 0;
+	while (splited[index])
+		index++;
+	if (index != 2)
+		ft_error(game, "Invalid element");
+	index = 0;
+	while (splited[0][index])
+		index++;
+	if (index == 2)
+		j+= 2;
+	if (index == 1)
+		j++;
 	start = 0;
 	end = 0;
 	if (game->file[i][j] != ' ')
@@ -206,10 +219,9 @@ void ft_dup_map(t_data *game, int start)
     
     while (start < game->map_height)
     {
-        game->map[i] = ft_strdup(game->file[start]); // ← FIX: Duplicate the string
-        if (!game->map[i]) // ← Add error checking
+        game->map[i] = ft_strdup(game->file[start]);
+        if (!game->map[i])
         {
-            // Clean up on failure
             while (--i >= 0)
                 free(game->map[i]);
             free(game->map);
@@ -240,13 +252,17 @@ void	ft_check_elm(t_data *game)
 			}
 			while (game->file[i][j] == ' ')
 				j++;
-			if (game->file[i][j] == 'N' && game->file[i][j+1] == 'O')
+			if ((game->file[i][j] == 'N' && game->file[i][j+1] == 'O')
+					|| game->file[i][j] == 'N')
 				ft_dup_path( game, &game->no,i, j, &game->sign.no);
-			else if (game->file[i][j] == 'S' && game->file[i][j+1] == 'O')
+			else if ((game->file[i][j] == 'S' && game->file[i][j+1] == 'O')
+					|| game->file[i][j] == 'S')
 				ft_dup_path( game, &game->so, i, j, &game->sign.so);
-			else if (game->file[i][j] == 'W' && game->file[i][j+1] == 'E')
+			else if ((game->file[i][j] == 'W' && game->file[i][j+1] == 'E')
+					|| game->file[i][j] == 'W')
 				ft_dup_path( game, &game->we, i, j, &game->sign.we);
-			else if (game->file[i][j] == 'E' && game->file[i][j+1] == 'A')
+			else if ((game->file[i][j] == 'E' && game->file[i][j+1] == 'A')
+					|| game->file[i][j] == 'E')
 				ft_dup_path( game, &game->ea, i, j, &game->sign.ea);
 			else if	(game->file[i][j] == 'F')
 				ft_dup_color( game, &game->f_tmp, i, j, &game->sign.f);
