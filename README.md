@@ -1,12 +1,12 @@
 to do :
 
-SO SO SO SO SO ./path_to_the_south_texture
+// SO SO SO SO SO ./path_to_the_south_texture
 
-file whitout map
+// file whitout map
 
-\n in the end of the map
+// \n in the end of the map
 
-can't found all elements 
+// can't found all elements 
 
 shift rgb bits
 

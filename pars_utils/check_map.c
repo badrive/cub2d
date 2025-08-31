@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:43:15 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/30 17:22:14 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/30 21:40:20 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void validate_map_pos(t_data *game)
     }
     
     if (player_count == 0)
-        ft_error(game, "Map without position");
+        ft_error(game, "Invalid MAP");
     if (player_count != 1)
         ft_error(game, "Multiple MAP positions");
 }

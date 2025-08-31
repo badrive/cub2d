@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/30 21:37:09 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/31 18:48:26 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,14 @@ void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 	free(tmp);
 }
 
-void		ft_rgbit(t_data *game, char *str)
+void		ft_rgbit(t_data *game, int r, int g, int b, char fc)
+{
+	if (fc == 'F')
+		game->f = (r << 16) | (g << 8) | (b << 0);
+	else
+		game->c = (r << 16) | (g << 8) | (b << 0);
+}
+void		ft_check_rgb(t_data *game, char *str, char fc)
 {
 	char	**tmp;
 	int (r), (g), (b);
@@ -158,10 +165,11 @@ void		ft_rgbit(t_data *game, char *str)
         free(tmp[i]);
         i++;
     }
+	ft_rgbit( game, r, g, b, fc);
     free(tmp);
 }
 
-void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign)
+void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign, char fc)
 {
 	char	*tmp;
 	int		(start), (end);
@@ -196,7 +204,7 @@ void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign)
 	tmp[j] = '\0';
 	
 	*identifier = ft_strdup(tmp);
-	ft_rgbit(game, tmp);
+	ft_check_rgb(game, tmp, fc);
 	*sign = 1;
 	free(tmp);
 }
@@ -212,6 +220,8 @@ void ft_dup_map(t_data *game, int start)
     int i, size;
     
     i = 0;
+	while (game->file[start][0] == '\0')
+		start++;
     size = game->map_height - start;
     game->map = malloc(sizeof(char*) * (size + 1));
     if (!game->map)
@@ -219,6 +229,8 @@ void ft_dup_map(t_data *game, int start)
     
     while (start < game->map_height)
     {
+		if (game->file[start][i] == '\0')
+			break;
         game->map[i] = ft_strdup(game->file[start]);
         if (!game->map[i])
         {
@@ -232,6 +244,8 @@ void ft_dup_map(t_data *game, int start)
         start++;
     }
     game->map[i] = NULL;
+	if (game->file[game->map_height-1][0] == '\0')
+		ft_error(game, "Invalid MAP");
 }
 
 void	ft_check_elm(t_data *game)
@@ -246,7 +260,6 @@ void	ft_check_elm(t_data *game)
 			j = 0;
 			if (all_elements_found(game))
 			{
-				printf("->%d \n", i);
 				ft_dup_map(game,i);
 				return ;
 			}
@@ -265,14 +278,11 @@ void	ft_check_elm(t_data *game)
 					|| game->file[i][j] == 'E')
 				ft_dup_path( game, &game->ea, i, j, &game->sign.ea);
 			else if	(game->file[i][j] == 'F')
-				ft_dup_color( game, &game->f_tmp, i, j, &game->sign.f);
+				ft_dup_color( game, &game->f_tmp, i, j, &game->sign.f, 'F');
 			else if	(game->file[i][j] == 'C')
-				ft_dup_color( game, &game->c_tmp, i, j, &game->sign.c);
-			else if (game->file[i][j] != '\n' )
-			{
-				printf("---%s---", game->file[i]);
-				ft_error(game, "Invalide map element");
-			}
+				ft_dup_color( game, &game->c_tmp, i, j, &game->sign.c, 'C');
+			else if (game->file[i][j] != '\0' )
+				ft_error(game, "Invalide map elements");
 		}
 		i++;	
 	}

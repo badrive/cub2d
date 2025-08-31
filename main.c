@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/30 21:33:53 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/31 18:48:34 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,13 @@ int main (int ac, char **av)
     printf("---%s---\n", game->f_tmp);
     printf("---%s---\n", game->c_tmp);
     printf("---MAP---\n");
-    printf("%s", game->map[0]);
-    printf("%s", game->map[1]);
-    printf("%s", game->map[2]);
+    int i = 0;
+    while (game->map[i])
+    {
+        printf("-%s\n", game->map[i]);
+        i++;
+    }
+    printf("f = %d\nc = %d", game->f, game->c);
     ft_free(game);
     return (0);
 }
