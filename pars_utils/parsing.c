@@ -6,11 +6,24 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/31 18:48:26 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/31 22:07:34 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void free_split_array(char **array)
+{
+    int i = 0;
+    if (!array)
+        return;
+    while (array[i])
+    {
+        free(array[i]);
+        i++;
+    }
+    free(array);
+}
 
 void ft_check_map(t_data *game)
 {
@@ -69,7 +82,10 @@ void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 	while (splited[index])
 		index++;
 	if (index != 2)
+	{
+		free_split_array(splited);
 		ft_error(game, "Invalid element");
+	}
 	index = 0;
 	while (splited[0][index])
 		index++;
@@ -86,7 +102,7 @@ void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 	if (game->file[i][j] == '\n')
 		ft_error(game, "Identifier without path");
 	start = j;
-	while (game->file[i][j]  != ' ')
+	while (game->file[i][j] && game->file[i][j]  != ' ')
 	{
 		if (game->file[i][j] == '\n')
 			break ;		
@@ -104,6 +120,13 @@ void		ft_dup_path(t_data *game, char **identifier, int	i, int	j, int *sign)
 	tmp[j] = '\0';
 	*identifier = ft_strdup(tmp);
 	*sign = 1;
+	index = 0;
+    while (splited[index])
+    {
+        free(splited[index]);
+        index++;
+    }
+    free(splited);
 	free(tmp);
 }
 
@@ -118,11 +141,9 @@ void		ft_check_rgb(t_data *game, char *str, char fc)
 {
 	char	**tmp;
 	int (r), (g), (b);
-	
 	r = 0;
 	g = 0;
 	b = 0;
-
 	int	i = 0;
 	int	comma = 0;
 	while(str[i])
@@ -141,32 +162,29 @@ void		ft_check_rgb(t_data *game, char *str, char fc)
 		i++;
 	if (i != 3)
 	{
-		i = 0;
-        while (tmp[i])
-        {
-            free(tmp[i]);
-            i++;
-        }
-        free(tmp);
+		free_split_array(tmp);
 		ft_error(game, "Invalid R.G.B");
 	}
 	r = ft_atoi(tmp[0]);
 	if (r < 0 || r > 255)
+	{
+		free_split_array(tmp);
 		ft_error(game, "Invalid R.G.B");
+	}
 	g = ft_atoi(tmp[1]);
 	if (g < 0 || g > 255)
+	{
+		free_split_array(tmp);
 		ft_error(game, "Invalid R.G.B");
+	}
 	b = ft_atoi(tmp[2]);
 	if (b < 0 || b > 255)
+	{
+		free_split_array(tmp);
 		ft_error(game, "Invalid R.G.B");
-	i = 0;
-    while (tmp[i])
-    {
-        free(tmp[i]);
-        i++;
-    }
+	}
+	free_split_array(tmp);
 	ft_rgbit( game, r, g, b, fc);
-    free(tmp);
 }
 
 void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign, char fc)
@@ -186,7 +204,7 @@ void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign, char
 	if (game->file[i][j] == '\n')
 		ft_error(game, "Identifier without R.G.B");
 	start = j;
-	while (game->file[i][j]  != ' ')
+	while (game->file[i][j] && game->file[i][j]  != ' ')
 	{
 		if (game->file[i][j] == '\n')
 			break ;		
@@ -204,9 +222,9 @@ void	ft_dup_color(t_data *game, char **identifier, int	i, int	j, int *sign, char
 	tmp[j] = '\0';
 	
 	*identifier = ft_strdup(tmp);
-	ft_check_rgb(game, tmp, fc);
-	*sign = 1;
 	free(tmp);
+	ft_check_rgb(game, *identifier, fc);
+	*sign = 1;
 }
 
 int all_elements_found(t_data *game)

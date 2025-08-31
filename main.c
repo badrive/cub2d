@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:00:59 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/31 18:48:34 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/31 20:58:59 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void    init_game(t_data	*game)
 {
     game->file = NULL;
     game->map = NULL;
-    game->map_width = 0;
     game->map_height = 0;
     game->no = NULL;
 	game->so = NULL;
@@ -66,7 +65,8 @@ int main (int ac, char **av)
         printf("-%s\n", game->map[i]);
         i++;
     }
-    printf("f = %d\nc = %d", game->f, game->c);
+    printf("f = %d\nc = %d\n", game->f, game->c);
+    printf("x = %d\ny = %d\n", game->x, game->y);
     ft_free(game);
     return (0);
 }

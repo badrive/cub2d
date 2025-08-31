@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/31 16:12:24 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/08/31 18:57:08 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct      s_data
 {
 	char	**file;
 	char	**map;
-	int		map_width;
 	int		map_height;
 	char	*no;
 	char	*so;
