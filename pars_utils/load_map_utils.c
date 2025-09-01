@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/31 14:44:05 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/01 12:06:34 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ void	allocate_file(t_data *game)
 		ft_exit(game);
 }
 
-int ft_allocate_file_line(t_data *game, char *line, int i)
+int	ft_allocate_file_line(t_data *game, char *line, int i)
 {
-    int len = ft_strlen(line);
+	int	len;
 
-    if (len > 0 && line[len - 1] == '\n')
-        line[len - 1] = '\0';
-    
-    game->file[i] = ft_strdup(line);
-    if (!game->file[i])
-    {
-        while (i >= 0)
-        {
-            if (game->file[i])
-                free(game->file[i]);
-            i--;
-        }
-        return (0);
-    }
-    return (1);
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	game->file[i] = ft_strdup(line);
+	if (!game->file[i])
+	{
+		while (i >= 0)
+		{
+			if (game->file[i])
+				free(game->file[i]);
+			i--;
+		}
+		return (0);
+	}
+	return (1);
 }
 
 void	read_file(t_data *game, const char *map_file)
@@ -87,14 +87,3 @@ void	read_file(t_data *game, const char *map_file)
 	}
 	game->file[i] = NULL;
 }
-
-// void	validate_map_dimensions(t_data *game)
-// {
-// 	if (!game || !game->file || !game->file[0])
-//         ft_error(game, "Invalid game data or map");
-// 	game->map_width = ft_strlen(game->file[0]);
-// 	if (game->file[0][game->map_width - 1] == '\n')
-// 		game->map_width--;
-// 	if (game->map_width <= 0 || game->map_height <= 0)
-// 		ft_error(game, "Invalid map dimensions");
-// }

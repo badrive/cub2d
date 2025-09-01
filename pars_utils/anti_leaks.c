@@ -47,29 +47,29 @@ void	ie_free(t_save **head)
 	}
 }
 
-void *ft_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
-    void *add;
-    t_save *new_node;
-    
-    if (size == 0)
-    {
-        t_save **head = save_add();
-        ie_free(head);
-        return (NULL);
-    }
-    add = malloc(size);
-    if (!add)
-        return (NULL);
-    new_node = malloc(sizeof(t_save));
-    if (!new_node)
-    {
-        free(add);
-        return (NULL);
-    }
-    new_node->add = add;
-    new_node->next = *save_add();
-    *save_add() = new_node;
-    
-    return (add);
+	void	*add;
+	t_save	*new_node;
+	t_save	**head;
+
+	if (size == 0)
+	{
+		head = save_add();
+		ie_free(head);
+		return (NULL);
+	}
+	add = malloc(size);
+	if (!add)
+		return (NULL);
+	new_node = malloc(sizeof(t_save));
+	if (!new_node)
+	{
+		free(add);
+		return (NULL);
+	}
+	new_node->add = add;
+	new_node->next = *save_add();
+	*save_add() = new_node;
+	return (add);
 }
