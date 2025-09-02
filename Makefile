@@ -1,14 +1,10 @@
-NAME = cub3d
-
+NAME = cub
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-
 CC = cc
-
-CFLAGS = -Wall -Wextra -Werror #-g3 
-
-SRCS = main.c $(wildcard pars_utils/*.c) $(wildcard get_next_line/*.c)
-
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm
+SRCS = main.c $(wildcard pars_utils/*.c) $(wildcard get_next_line/*.c) $(wildcard ray_castin/*.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
@@ -17,7 +13,10 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -28,3 +27,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

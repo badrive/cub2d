@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 12:08:27 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/02 14:21:09 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../includs/parsing.h"  
 
 void	load_map(t_data *game, const char *map_file)
 {

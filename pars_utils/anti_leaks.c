@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   anti_leaks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 14:41:56 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/25 16:09:07 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/01 16:56:03 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
+#include "../includs/parsing.h"  
 t_save	**save_add(void)
 {
 	static t_save	*save;

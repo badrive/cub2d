@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   load_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 12:06:34 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/01 16:56:20 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
-
+#include "../includs/parsing.h"  
 void	calculate_file_height(t_data *game, const char *map_file)
 {
 	int		fd;

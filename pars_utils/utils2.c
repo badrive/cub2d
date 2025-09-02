@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:08 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 12:08:33 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/01 18:04:59 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../includs/parsing.h"  
 
 void	ft_check_map(t_data *game)
 {

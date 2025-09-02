@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:10:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/08/25 17:14:49 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/09/01 18:09:28 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../pars_utils/parsing.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
