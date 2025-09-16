@@ -1,5 +1,16 @@
-#include "../includs/parsing.h"  
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/07 15:54:48 by moelgham          #+#    #+#             */
+/*   Updated: 2025/09/09 13:49:49 by moelgham         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../includs/parsing.h"  
 
 double	dist(float ax, float ay, float bx, float by)
 {
@@ -11,7 +22,7 @@ double	degtorad(double a)
 	return (a * 3.14 / 180.0);
 }
 
-void	my_mlx_pixel_put(t_data *game, int x, int y, int color)
+void	my_print_pixel_put(t_data *game, int x, int y, int color)
 {
 	char	*dst;
 
