@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:08 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 18:04:59 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/01 21:19:54 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_check_map(t_data *game)
 {
 	int i, j;
 	i = 0;
+	if (!game->map)
+		ft_error(game, "Invalid MAP");
 	while (game->map[i])
 	{
 		j = 0;

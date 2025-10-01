@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/02 09:05:13 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:17:02 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"  
+
 
 void	ft_error(t_data *game, char *error)
 {

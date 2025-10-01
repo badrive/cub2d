@@ -3,36 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   load_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 16:56:20 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/01 16:04:21 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
-void	calculate_file_height(t_data *game, const char *map_file)
-{
-	int		fd;
-	char	*line;
+#include "../includs/parsing.h"
 
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		ft_error(game, "Failed to open map file");
-	game->map_height = 0;
-	line = get_next_line(fd);
-	while (line)
+int		is_emty_line(char *line)
+{
+	int i;
+
+	i = 0;
+	if (line[0] == '\n')
+		return (1);
+	while (line[i])
 	{
-		game->map_height++;
-		free(line);
-		line = get_next_line(fd);
+		if (line[i] == ' ')
+			return (1);
+		i++;
 	}
-	if (game->map_height == 0)
-	{
-		ft_error(game, "Map file is empty");
-	}
-	close(fd);
+	return (0);
 }
+
+void calculate_file_height(t_data *game, const char *map_file)
+{
+    int fd;
+    char *line;
+    
+    fd = open(map_file, O_RDONLY);
+    if (fd < 0)
+        ft_error(game, "Failed to open map file");
+    game->map_height = 0;
+    line = get_next_line(fd);
+    while (line)
+    {
+        game->map_height++;
+        // REMOVE the is_emty_line check
+        free(line);
+        line = get_next_line(fd);
+    }
+    if (game->map_height == 0)
+        ft_error(game, "Map file is empty");
+    close(fd);
+}
+
 
 void	allocate_file(t_data *game)
 {

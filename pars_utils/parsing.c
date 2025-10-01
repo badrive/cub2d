@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:03 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/02 14:21:09 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/01 15:17:41 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,7 @@ void	ft_dup_path(t_data *game, char **identifier, int i, int j, int *sign)
 	tmp[j] = '\0';
 	*identifier = ft_strdup(tmp);
 	*sign = 1;
-	index = 0;
-	while (splited[index])
-	{
-		free(splited[index]);
-		index++;
-	}
-	free(splited);
+	free_split_array(splited);
 	free(tmp);
 }
 
@@ -146,10 +140,20 @@ void	ft_dup_color(t_data *game, char **identifier, int i, int j, int *sign,
 		char fc)
 {
 	char	*tmp;
+	char	**splited;
 
-	int(start), (end);
+	int(start), (end), (index);
 	if (*sign != 0)
 		ft_error(game, "Duplicate element");
+	splited = ft_split(game->file[i], ' ');
+	index = 0;
+	while (splited[index])
+		index++;
+	if (index != 2)
+	{
+		free_split_array(splited);
+		ft_error(game, "Invalid R.G.B");
+	}
 	j++;
 	start = 0;
 	end = 0;
@@ -178,6 +182,7 @@ void	ft_dup_color(t_data *game, char **identifier, int i, int j, int *sign,
 	tmp[j] = '\0';
 	*identifier = ft_strdup(tmp);
 	free(tmp);
+	free_split_array(splited);
 	ft_check_rgb(game, *identifier, fc);
 	*sign = 1;
 }
@@ -192,8 +197,10 @@ void	ft_dup_map(t_data *game, int start)
 {
 	int i, size;
 	i = 0;
-	while (game->file[start][0] == '\0')
+	while (game->file[start] && (game->file[start][0] == '\0' || is_emty_line(game->file[start])))
 		start++;
+	if (start == 0)
+		ft_error(game, "Invalid MAP");
 	size = game->map_height - start;
 	game->map = malloc(sizeof(char *) * (size + 1));
 	if (!game->map)
@@ -225,7 +232,7 @@ void	ft_check_elm(t_data *game)
 	i = 0;
 	while (game->file[i])
 	{
-		if (game->file[i][0] != '\n')
+		if (game->file[i][0] != '\n' )
 		{
 			j = 0;
 			if (all_elements_found(game))
@@ -236,16 +243,16 @@ void	ft_check_elm(t_data *game)
 			while (game->file[i][j] == ' ')
 				j++;
 			if ((game->file[i][j] == 'N' && game->file[i][j + 1] == 'O')
-				|| game->file[i][j] == 'N')
+			|| game->file[i][j] == 'N')
 				ft_dup_path(game, &game->no, i, j, &game->sign.no);
 			else if ((game->file[i][j] == 'S' && game->file[i][j + 1] == 'O')
-					|| game->file[i][j] == 'S')
+			|| game->file[i][j] == 'S')
 				ft_dup_path(game, &game->so, i, j, &game->sign.so);
 			else if ((game->file[i][j] == 'W' && game->file[i][j + 1] == 'E')
-					|| game->file[i][j] == 'W')
+			|| game->file[i][j] == 'W')
 				ft_dup_path(game, &game->we, i, j, &game->sign.we);
 			else if ((game->file[i][j] == 'E' && game->file[i][j + 1] == 'A')
-					|| game->file[i][j] == 'E')
+			|| game->file[i][j] == 'E')
 				ft_dup_path(game, &game->ea, i, j, &game->sign.ea);
 			else if (game->file[i][j] == 'F')
 				ft_dup_color(game, &game->f_tmp, i, j, &game->sign.f, 'F');

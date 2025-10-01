@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:43:15 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 16:56:16 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:59:45 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
+#include "../includs/parsing.h"
+
 char	get_map_char(char **map, int y, int x)
 {
 	if (y < 0 || x < 0 || !map[y])

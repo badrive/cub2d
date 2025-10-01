@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/02 14:22:34 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:41:27 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define RIGHT 100
 
 /* ======================= WINDOW ======================= */
-# define WIN_WIDTH 800
+# define WIN_WIDTH 750
 # define WIN_HIGHT 800
 # define P_SPEED 10
 # define TILE_SIZE 50
@@ -133,6 +133,7 @@ void	free_split_array(char **array);
 void	ft_check_file(t_data *game, const char *file);
 void	ft_rgbit(t_data *game, int r, int g, int b, char fc);
 void	parse(t_data *game, char *filename);
+int		is_emty_line(char *line);
 
 /* rendering */
 int ft_hook(t_data *g);
@@ -158,5 +159,6 @@ void	my_mlx_pixel_put(t_data *game, int x, int y, int color);
 int		KeyPress(int keycode, t_data *g);
 int		KeyRelease(int keycode, t_data *g);
 int		ft_hook(t_data *g);
+
 
 #endif
