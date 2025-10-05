@@ -6,12 +6,11 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/01 15:17:02 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/05 21:53:12 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
-
+#include "../includs/parsing.h"
 
 void	ft_error(t_data *game, char *error)
 {
@@ -42,7 +41,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void	ft_free(t_data *game)
+static void	ft_free_textures_and_files(t_data *game)
 {
 	int	i;
 
@@ -66,6 +65,12 @@ void	ft_free(t_data *game)
 		free(game->file);
 		game->file = NULL;
 	}
+}
+
+static void	ft_free_map_and_data(t_data *game)
+{
+	int	i;
+
 	if (game->map)
 	{
 		i = 0;
@@ -74,13 +79,36 @@ void	ft_free(t_data *game)
 		free(game->map);
 		game->map = NULL;
 	}
-	// ft_free_mlx(game);
+	if (game->keys)
+		free(game->keys);
+	if (game->llen)
+		free(game->llen);
+	if (game->bpp)
+		free(game->bpp);
+	if (game->endian)
+		free(game->endian);
+	if (game->keys)
+		free(game->keys);
+	if (game->llen)
+		free(game->llen);
+	if (game->bpp)
+		free(game->bpp);
+	if (game->endian)
+		free(game->endian);
+}
+
+void	ft_free(t_data *game)
+{
+	if (!game)
+		return ;
+	ft_free_textures_and_files(game);
+	ft_free_map_and_data(game);
 	free(game);
 }
 
 void	free_split_array(char **array)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!array)

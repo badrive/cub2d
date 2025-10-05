@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 10:12:32 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/01 15:30:14 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/05 21:48:14 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	init_game(t_data *game)
 	game->c_tmp = NULL;
 	game->f = 0;
 	game->c = 0;
+	game->red = 0;
+	game->green = 0;
+	game->blue = 0;
 	game->sign.no = 0;
 	game->sign.so = 0;
 	game->sign.we = 0;
@@ -33,6 +36,10 @@ void	init_game(t_data *game)
 	game->sign.c = 0;
 	game->x = 0;
 	game->y = 0;
+	game->keys = NULL;
+    game->llen = NULL;
+    game->bpp = NULL;
+    game->endian = NULL;
 }
 
 void player_angle(t_data *game, char c)
@@ -120,13 +127,13 @@ int main(int ac, char **av)
 		return (1);
 	init_game(game);
     ft_check_file(game, av[1]);
-    game->mlx = mlx_init();
-    ft_init(game);
-    mlx_hook(game->mlx_win, 2, 1L<<0, KeyPress, game);
-    mlx_hook(game->mlx_win, 3, 1L<<1, KeyRelease, game);
-    mlx_hook(game->mlx_win, 17, 0L, red_cross, game);
-    mlx_loop_hook(game->mlx, ft_hook, game);
-    mlx_loop(game->mlx);
+    // game->mlx = mlx_init();
+    // ft_init(game);
+    // mlx_hook(game->mlx_win, 2, 1L<<0, KeyPress, game);
+    // mlx_hook(game->mlx_win, 3, 1L<<1, KeyRelease, game);
+    // mlx_hook(game->mlx_win, 17, 0L, red_cross, game);
+    // mlx_loop_hook(game->mlx, ft_hook, game);
+    // mlx_loop(game->mlx);
 	ft_free(game);
     return 0;
 }

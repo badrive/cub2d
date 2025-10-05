@@ -6,15 +6,15 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:08 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/01 21:19:54 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/05 17:45:33 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
+#include "../includs/parsing.h"
 
 void	ft_check_map(t_data *game)
 {
-	int i, j;
+	int (i), (j);
 	i = 0;
 	if (!game->map)
 		ft_error(game, "Invalid MAP");
@@ -50,10 +50,21 @@ int	validate_args(int ac, char **av)
 	return (1);
 }
 
-void	ft_rgbit(t_data *game, int r, int g, int b, char fc)
+void	ft_rgbit(t_data *game, char fc)
 {
 	if (fc == 'F')
-		game->f = (r << 16) | (g << 8) | (b << 0);
+		game->f = (game->red << 16) | (game->green << 8) | (game->blue << 0);
 	else
-		game->c = (r << 16) | (g << 8) | (b << 0);
+		game->c = (game->red << 16) | (game->green << 8) | (game->blue << 0);
+}
+
+// Helper function to get color sign flag pointer
+int	*get_color_sign_flag(t_data *game, char fc)
+{
+	if (fc == 'F')
+		return (&game->sign.f);
+	else if (fc == 'C')
+		return (&game->sign.c);
+	ft_error(game, "Invalid color character");
+	return (NULL);
 }
