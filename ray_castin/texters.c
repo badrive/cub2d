@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 15:43:51 by moelgham          #+#    #+#             */
-/*   Updated: 2025/09/15 13:41:57 by moelgham         ###   ########.fr       */
+/*   Created: 2025/09/07 20:43:51 by moelgham          #+#    #+#             */
+/*   Updated: 2025/09/30 13:11:07 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-void	ft_drawline4(t_data *g, float y, double lineh, float x)
+void	ft_drawline2(t_data *g, float y, double lineh, float x)
 {
 	char	*dst;
 	int		i;
@@ -39,7 +39,7 @@ void	ft_drawline4(t_data *g, float y, double lineh, float x)
 	}
 }
 
-void	ft_drawline3(t_data *g, float y, double lineh, float x)
+void	ft_drawline1(t_data *g, float y, double lineh, float x)
 {
 	char	*dst;
 	int		i;

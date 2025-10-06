@@ -6,7 +6,7 @@
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 16:25:26 by moelgham          #+#    #+#             */
-/*   Updated: 2025/09/13 17:45:59 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:49:15 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,18 @@ int	ft_destroy(t_data *g)
 	ft_free(g);
 	exit(0);
 	return (0);
+}
+
+int	check_position(t_data *g, int x, int y)
+{
+	return (g->map[y][x] && g->map[y][x] == '0');
+}
+
+void	calculate_vector(t_data *g, double angle, double *dx, double *dy)
+{
+	double	na;
+
+	na = fixang(g->pv + angle);
+	*dx = cos(degtorad(na)) * P_SPEED;
+	*dy = sin(degtorad(na)) * P_SPEED;
 }

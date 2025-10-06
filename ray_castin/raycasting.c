@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/07 15:42:38 by moelgham          #+#    #+#             */
-/*   Updated: 2025/09/12 09:38:12 by moelgham         ###   ########.fr       */
+/*   Created: 2025/09/07 20:42:38 by moelgham          #+#    #+#             */
+/*   Updated: 2025/09/30 13:14:28 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_3dscene(t_data *game, float x, float y, int is_horizontal)
 	line_height = original_height;
 	if (line_height > WIN_HIGHT)
 		line_height = WIN_HIGHT;
-	line_offset = (WIN_HIGHT / 2.0) - (line_height / 2.0);
+	line_offset = (WIN_HIGHT / 2) - (line_height / 2);
 	if (is_horizontal == 1)
-		ft_drawline3(game, line_offset, original_height, x);
+		ft_drawline1(game, line_offset, original_height, x);
 	else
-		ft_drawline4(game, line_offset, original_height, y);
+		ft_drawline2(game, line_offset, original_height, y);
 	ft_drawfloor(game, line_height, line_offset);
 	ft_drawceiling(game, line_offset);
 }
@@ -41,8 +41,8 @@ int	is_wall(t_data *game, double x, double y)
 	int	map_x;
 	int	map_y;
 
-	map_x = (int)x / 50;
-	map_y = (int)y / 50;
+	map_x = (int)(x / 50);
+	map_y = (int)(y / 50);
 	if (game->map[map_y][map_x] == '1')
 		return (1);
 	else

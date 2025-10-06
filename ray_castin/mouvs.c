@@ -6,117 +6,115 @@
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 15:59:35 by moelgham          #+#    #+#             */
-/*   Updated: 2025/09/15 13:20:39 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:46:02 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-void ft_moveup(t_data *g)
+void	ft_moveup(t_data *g)
 {
-    int next_x;
-    int next_y;
-    int x_offset;
-    int y_offset;
+	int	x_offset;
+	int	y_offset;
+	int	current_x;
+	int	current_y;
 
-    if (g->pdx < 0)
-        x_offset = -20;
-    else
-        x_offset = 20;
-
-    if (g->pdy < 0)
-        y_offset = -20;
-    else
-        y_offset = 20;
-    next_x = (int)((g->px + x_offset) / 50);
-    next_y = (int)((g->py + y_offset) / 50);
-    if (g->map[next_y][next_x] == '0')
-    {
-        g->px += g->pdx;
-        g->py += g->pdy;
-    }
+	if (g->pdx < 0)
+		x_offset = -20;
+	else
+		x_offset = 20;
+	if (g->pdy < 0)
+		y_offset = -20;
+	else
+		y_offset = 20;
+	current_x = (int)(g->px / 50);
+	current_y = (int)(g->py / 50);
+	if (g->map[(int)((g->py + y_offset) / 50)]
+		[(int)((g->px + x_offset) / 50)] == '1'
+		&& g->map[current_y][(int)((g->px + x_offset) / 50)] == '0'
+		&& g->map[(int)((g->py + y_offset) / 50)][current_x] == '0')
+		return ;
+	if (g->map[current_y][(int)((g->px + x_offset) / 50)] == '0')
+		g->px += g->pdx;
+	if (g->map[(int)((g->py + y_offset) / 50)][current_x] == '0')
+		g->py += g->pdy;
 }
 
-void ft_movedown(t_data *g)
+void	ft_movedown(t_data *g)
 {
-    int next_x;
-    int next_y;
-    int x_offset;
-    int y_offset;
+	int	x_offset;
+	int	y_offset;
+	int	current_x;
+	int	current_y;
 
-    if (g->pdx < 0)
-        x_offset = -20;
-    else
-        x_offset = 20;
-
-    if (g->pdy < 0)
-        y_offset = -20;
-    else
-        y_offset = 20;
-    next_x = (int)((g->px - x_offset) / 50);
-    next_y = (int)((g->py - y_offset) / 50);
-    if (g->map[next_y][next_x] == '0')
-    {
-        g->px -= g->pdx;
-        g->py -= g->pdy;
-    }
+	if (g->pdx < 0)
+		x_offset = -20;
+	else
+		x_offset = 20;
+	if (g->pdy < 0)
+		y_offset = -20;
+	else
+		y_offset = 20;
+	current_x = (int)(g->px / 50.0);
+	current_y = (int)(g->py / 50.0);
+	if (g->map[current_y][(int)((g->px - x_offset) / 50.0)] == '0')
+		g->px -= g->pdx;
+	if (g->map[(int)((g->py - y_offset) / 50.0)][current_x] == '0')
+		g->py -= g->pdy;
 }
 
 void	ft_moveright(t_data *g)
 {
-	int		xo;
-	int		yo;
 	double	nadx;
 	double	nady;
-	double	na;
+	int		offset_x;
+	int		offset_y;
 
-	na = fixang(g->pv + 90.0);
-	nadx = cos(degtorad(na)) * P_SPEED;
-	nady = sin(degtorad(na)) * P_SPEED;
+	calculate_vector(g, 90.0, &nadx, &nady);
 	if (nadx < 0)
-		xo = -20;
+		offset_x = -20;
 	else
-		xo = 20;
-	if (nady < 0)
-		yo = -20;
-	else
-		yo = 20;
-	if (g->map[(int)((g->py) / 50.0)][(int)((g->px + xo) / 50.0)] == '0')
+		offset_x = 20;
+	if (check_position(g, (int)((g->px + nadx + offset_x) / 50),
+		(int)(g->py / 50)))
 		g->px += nadx;
-	if (g->map[(int)((g->py + yo) / 50.0)][(int)((g->px) / 50.0)] == '0')
+	if (nady < 0)
+		offset_y = -20;
+	else
+		offset_y = 20;
+	if (check_position(g, (int)(g->px / 50),
+		(int)((g->py + nady + offset_y) / 50)))
 		g->py += nady;
 }
 
 void	ft_moveleft(t_data *g)
 {
-	int		xo;
-	int		yo;
 	double	nadx;
 	double	nady;
-	double	na;
+	int		offset_x;
+	int		offset_y;
 
-	na = fixang(g->pv - 90.0);
-	nadx = cos(degtorad(na)) * P_SPEED;
-	nady = sin(degtorad(na)) * P_SPEED;
+	calculate_vector(g, -90.0, &nadx, &nady);
 	if (nadx < 0)
-		xo = -20;
+		offset_x = -20;
 	else
-		xo = 20;
-	if (nady < 0)
-		yo = -20;
-	else
-		yo = 20;
-	if (g->map[(int)((g->py) / 50.0)][(int)((g->px + xo) / 50.0)] == '0')
+		offset_x = 20;
+	if (check_position(g, (int)((g->px + nadx + offset_x) / 50),
+		(int)(g->py / 50)))
 		g->px += nadx;
-	if (g->map[(int)((g->py + yo) / 50.0)][(int)((g->px) / 50.0)] == '0')
+	if (nady < 0)
+		offset_y = -20;
+	else
+		offset_y = 20;
+	if (check_position(g, (int)(g->px / 50),
+		(int)((g->py + nady + offset_y) / 50)))
 		g->py += nady;
 }
 
 void	ft_rotateleft(t_data *g)
 {
-	g->pv -= 1;
-	if (g->pv < 0)
-		g->pv += 360;
+	g->pv -= 3;
+	g->pv = fixang(g->pv);
 	g->pdx = cos(degtorad(g->pv)) * P_SPEED;
 	g->pdy = sin(degtorad(g->pv)) * P_SPEED;
 }

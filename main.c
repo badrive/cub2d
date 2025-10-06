@@ -6,7 +6,7 @@
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 10:12:32 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/15 14:13:49 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/09/30 13:16:59 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	player_position(t_data *game)
 			d = game->map[i][j];
 			if (d == 'N' || d == 'S' || d == 'E' || d == 'W')
 			{
-				game->px = j * 50.1;
-				game->py = i * 50.1;
+				game->px = j * 50 + 25;
+				game->py = i * 50 + 25;
 				player_angle(game, d);
 				game->map[i][j] = '0';
 				return ;
@@ -54,9 +54,17 @@ void	player_position(t_data *game)
 void	get_tex_path(t_data *g)
 {
 	g->no_tex = mlx_xpm_file_to_image(g->mlx, g->no, &g->n_w, &g->n_h);
+	if (!g->no_tex)
+		ft_error(g, "Error: failed to load North texture");
 	g->we_tex = mlx_xpm_file_to_image(g->mlx, g->we, &g->w_w, &g->w_h);
+	if (!g->we_tex)
+		ft_error(g, "Error: failed to load West texture");
 	g->so_tex = mlx_xpm_file_to_image(g->mlx, g->so, &g->s_w, &g->s_h);
+	if (!g->so_tex)
+		ft_error(g, "Error: failed to load South texture");
 	g->ea_tex = mlx_xpm_file_to_image(g->mlx, g->ea, &g->e_w, &g->e_h);
+	if (!g->ea_tex)
+		ft_error(g, "Error: failed to load East texture");
 	g->no_texadr = mlx_get_data_addr(g->no_tex, &g->bpp[1],
 			&g->llen[1], &g->endian[1]);
 	g->so_texadr = mlx_get_data_addr(g->so_tex, &g->bpp[2],
@@ -69,7 +77,7 @@ void	get_tex_path(t_data *g)
 
 void	ft_init(t_data *game)
 {
-	game->keys = ft_calloc(1024, sizeof(int));
+	game->keys = ft_calloc(65364, sizeof(int));
 	game->llen = ft_calloc(5, sizeof(int));
 	game->bpp = ft_calloc(5, sizeof(int));
 	game->endian = ft_calloc(5, sizeof(int));
@@ -79,8 +87,8 @@ void	ft_init(t_data *game)
 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HIGHT);
 	game->addr = mlx_get_data_addr(game->img, &game->bpp[0],
 			&game->llen[0], &game->endian[0]);
-	game->pdx = cos(degtorad(game->pv)) * 5;
-	game->pdy = sin(degtorad(game->pv)) * 5;
+	game->pdx = cos(degtorad(game->pv)) * P_SPEED;
+	game->pdy = sin(degtorad(game->pv)) * P_SPEED;
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img, 0, 0);
 }
