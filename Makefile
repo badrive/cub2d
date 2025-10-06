@@ -4,7 +4,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -Lminilibx-linux -lmlx -lX11 -lXext -lm
-SRCS = main.c $(wildcard pars_utils/*.c) $(wildcard get_next_line/*.c) $(wildcard ray_castin/*.c)
+SRCS = main.c init_free.c $(wildcard pars_utils/*.c) $(wildcard get_next_line/*.c) $(wildcard ray_castin/*.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(LIBFT) $(NAME)
