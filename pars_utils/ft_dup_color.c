@@ -6,15 +6,12 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:23:44 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/05 17:33:12 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:42:55 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-// ============= ft_dup_color.c =============
-
-// Helper function to validate color element format
 static void	validate_color_element(t_data *game, char **splited)
 {
 	int	index;
@@ -29,7 +26,6 @@ static void	validate_color_element(t_data *game, char **splited)
 	}
 }
 
-// Helper to skip spaces and validate
 static int	skip_to_rgb(t_data *game, int i, int j)
 {
 	j++;
@@ -42,7 +38,6 @@ static int	skip_to_rgb(t_data *game, int i, int j)
 	return (j);
 }
 
-// Helper to find end position
 static int	find_rgb_end(t_data *game, int i, int j)
 {
 	while (game->file[i][j] && game->file[i][j] != ' ')
@@ -54,7 +49,6 @@ static int	find_rgb_end(t_data *game, int i, int j)
 	return (j);
 }
 
-// Helper function to extract RGB string
 static char	*extract_rgb_string(t_data *game, int i, int j)
 {
 	char	*tmp;

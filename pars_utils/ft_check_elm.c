@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:44:07 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/05 21:41:21 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:41:38 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	is_direction_match(char c1, char c2, char dir)
 	return (0);
 }
 
-// Helper to process element identifiers
 void	process_element(t_data *game, int i, int j)
 {
 	char	c1;
@@ -50,8 +49,6 @@ void	process_element(t_data *game, int i, int j)
 	else if (c1 != '\0')
 		ft_error(game, "Invalide map elements");
 }
-
-// ============= parsing.c =============
 
 void	ft_check_elm(t_data *game)
 {

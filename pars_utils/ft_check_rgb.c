@@ -6,13 +6,12 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:04:43 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/05 17:14:02 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:41:34 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-// Helper function to validate RGB string format
 static void	validate_rgb_format(t_data *game, char *str)
 {
 	int	i;
@@ -32,7 +31,6 @@ static void	validate_rgb_format(t_data *game, char *str)
 		ft_error(game, "Invalid R.G.B");
 }
 
-// Helper function to validate split array has 3 elements
 static void	validate_split_count(t_data *game, char **tmp)
 {
 	int	i;
@@ -47,7 +45,6 @@ static void	validate_split_count(t_data *game, char **tmp)
 	}
 }
 
-// Helper function to validate RGB value range
 static void	validate_rgb_value(t_data *game, int value, char **tmp)
 {
 	if (value < 0 || value > 255)
@@ -57,7 +54,6 @@ static void	validate_rgb_value(t_data *game, int value, char **tmp)
 	}
 }
 
-// Helper function to parse and validate all RGB values
 static void	parse_rgb_values(t_data *game, char **tmp)
 {
 	game->red = ft_atoi(tmp[0]);
@@ -68,7 +64,6 @@ static void	parse_rgb_values(t_data *game, char **tmp)
 	validate_rgb_value(game, game->blue, tmp);
 }
 
-// Main function - now under 25 lines
 void	ft_check_rgb(t_data *game, char *str, char fc)
 {
 	char	**tmp;

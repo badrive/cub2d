@@ -6,13 +6,12 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:53:14 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/05 16:53:42 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/07 21:41:09 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-// Helper function to get sign flag pointer
 static int	*get_sign_flag(t_data *game, char sign)
 {
 	if (sign == 'N')
@@ -26,7 +25,6 @@ static int	*get_sign_flag(t_data *game, char sign)
 	return (NULL);
 }
 
-// Helper function to validate element format
 static void	validate_element(t_data *game, char **splited, int *j)
 {
 	int	index;
@@ -48,7 +46,6 @@ static void	validate_element(t_data *game, char **splited, int *j)
 		(*j)++;
 }
 
-// Helper function to extract path string
 static char	*extract_path(t_data *game, int i, int j)
 {
 	char	*tmp;
@@ -78,7 +75,6 @@ static char	*extract_path(t_data *game, int i, int j)
 	return (tmp);
 }
 
-// Helper function to assign path to appropriate field
 static void	assign_path(t_data *game, char *tmp, char sign)
 {
 	if (sign == 'N')
@@ -91,7 +87,6 @@ static void	assign_path(t_data *game, char *tmp, char sign)
 		game->ea = ft_strdup(tmp);
 }
 
-// Main function - now under 25 lines
 void	ft_dup_path(t_data *game, int i, int j, char sign)
 {
 	char	*tmp;
