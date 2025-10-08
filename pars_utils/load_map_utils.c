@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   load_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 13:03:51 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/01 16:56:20 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/07 21:27:23 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
+#include "../includs/parsing.h"
+
+int	is_emty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line || line[0] == '\0' || line[0] == '\n')
+		return (1);
+	while (line[i])
+	{
+		if (line[i] == '\n')
+			return (1);
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	calculate_file_height(t_data *game, const char *map_file)
 {
 	int		fd;
@@ -28,9 +47,7 @@ void	calculate_file_height(t_data *game, const char *map_file)
 		line = get_next_line(fd);
 	}
 	if (game->map_height == 0)
-	{
 		ft_error(game, "Map file is empty");
-	}
 	close(fd);
 }
 

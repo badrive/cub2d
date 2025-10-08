@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 20:43:20 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/24 15:32:10 by moelgham         ###   ########.fr       */
+/*   Created: 2025/08/28 20:43:15 by bfaras            #+#    #+#             */
+/*   Updated: 2025/10/07 20:58:49 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includs/parsing.h"  
+#include "../includs/parsing.h"
+
 char	get_map_char(char **map, int y, int x)
 {
 	if (y < 0 || x < 0 || !map[y])
@@ -22,10 +23,9 @@ char	get_map_char(char **map, int y, int x)
 
 void	flood_fill(t_data *game, int y, int x, char **map)
 {
-	if (get_map_char(map, y, x + 1) == ' '
-		|| get_map_char(map, y, x - 1) == ' '
-		|| get_map_char(map, y + 1, x) == ' '
-		|| get_map_char(map, y - 1, x) == ' ')
+	if (get_map_char(map, y, x + 1) == ' ' || get_map_char(map, y, x - 1) == ' '
+		|| get_map_char(map, y + 1, x) == ' ' || get_map_char(map, y - 1,
+			x) == ' ')
 	{
 		ft_error(game, "Invalid MAP");
 	}

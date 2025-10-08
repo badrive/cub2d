@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:33 by bfaras            #+#    #+#             */
-/*   Updated: 2025/09/26 14:29:17 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/08 21:13:17 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ typedef struct s_data
 	char	*c_tmp;
 	int		f;
 	int		c;
+	int		red;
+	int		green;
+	int		blue;
 	t_sign	sign;
 	void	*mlx;
 	void	*mlx_win;
@@ -120,7 +123,15 @@ void	validate_map_char(t_data *game);
 void	validate_map_pos(t_data *game);
 void	free_split_array(char **array);
 void	ft_check_file(t_data *game, const char *file);
-void	ft_rgbit(t_data *game, int r, int g, int b, char fc);
+void	ft_rgbit(t_data *game, char fc);
+void	parse(t_data *game, char *filename);
+int		is_emty_line(char *line);
+void	ft_dup_path(t_data *game, int i, int j, char sign);
+void	ft_check_rgb(t_data *game, char *str, char fc);
+int		*get_color_sign_flag(t_data *game, char fc);
+void	ft_dup_color(t_data *game, int i, int j, char fc);
+int		all_elements_found(t_data *game);
+void	ft_dup_map(t_data *game, int start);
 
 /* rendering */
 int		ft_hook(t_data *g);
