@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 16:25:26 by moelgham          #+#    #+#             */
-/*   Updated: 2025/10/02 18:49:15 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:58:10 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includs/parsing.h"
 
-void	init_game(t_data *game)
+void	init_game2(t_data *game)
 {
 	game->file = NULL;
 	game->map = NULL;
@@ -25,6 +25,14 @@ void	init_game(t_data *game)
 	game->c_tmp = NULL;
 	game->f = 0;
 	game->c = 0;
+	game->red = 0;
+	game->green = 0;
+	game->blue = 0;
+}
+
+void	init_game(t_data *game)
+{
+	init_game2(game);
 	game->sign.no = 0;
 	game->sign.so = 0;
 	game->sign.we = 0;
@@ -33,6 +41,10 @@ void	init_game(t_data *game)
 	game->sign.c = 0;
 	game->x = 0;
 	game->y = 0;
+	game->keys = NULL;
+	game->llen = NULL;
+	game->bpp = NULL;
+	game->endian = NULL;
 }
 
 int	ft_destroy(t_data *g)
