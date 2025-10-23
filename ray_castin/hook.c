@@ -6,7 +6,7 @@
 /*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 20:58:23 by moelgham          #+#    #+#             */
-/*   Updated: 2025/09/30 13:14:17 by moelgham         ###   ########.fr       */
+/*   Updated: 2025/10/23 12:00:02 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	ft_hook(t_data *g)
 	if (g->keys[RIGHT])
 		ft_moveright(g);
 	if (g->keys[EXIT])
+	{
+		ft_destroy(g);
 		exit(0);
+	}
 	if (g->keys[LF])
 		ft_rotateleft(g);
 	if (g->keys[LR])

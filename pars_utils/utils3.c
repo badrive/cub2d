@@ -3,21 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 21:16:34 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/08 21:17:20 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/23 12:07:57 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-void	ft_error(t_data *game, char *error)
+void	ft_error(t_data *g, char *error)
 {
-	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(error, 2);
 	write(2, "\n", 1);
-	ft_free(game);
+	if (g->no_tex)
+		mlx_destroy_image(g->mlx, g->no_tex);
+	if (g->so_tex)
+		mlx_destroy_image(g->mlx, g->so_tex);
+	if (g->we_tex)
+		mlx_destroy_image(g->mlx, g->we_tex);
+	if (g->ea_tex)
+		mlx_destroy_image(g->mlx, g->ea_tex);
+	if (g->mlx)
+	{
+		mlx_destroy_display(g->mlx);
+		free(g->mlx);
+		g->mlx = NULL;
+	}
+	ft_free(g);
 	exit(1);
 }
 

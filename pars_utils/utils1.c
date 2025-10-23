@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moelgham <moelgham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 12:01:05 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/08 21:18:09 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/23 11:55:47 by moelgham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ static void	ft_free_map_and_data(t_data *game)
 		free(game->map);
 		game->map = NULL;
 	}
-	if (game->keys)
-		free(game->keys);
-	if (game->llen)
-		free(game->llen);
 	if (game->bpp)
 		free(game->bpp);
 	if (game->endian)
@@ -68,10 +64,6 @@ void	ft_free(t_data *game)
 {
 	if (!game)
 		return ;
-	if (game->bpp)
-		free(game->bpp);
-	if (game->endian)
-		free(game->endian);
 	ft_free_textures_and_files(game);
 	ft_free_map_and_data(game);
 	free(game);
