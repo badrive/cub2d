@@ -87,20 +87,20 @@ static void	assign_path(t_data *game, char *tmp, char sign)
 		game->ea = ft_strdup(tmp);
 }
 
-void	ft_dup_path(t_data *game, int i, int j, char sign)
+void    ft_dup_path(t_data *game, int i, int j, char sign)
 {
-	char	*tmp;
-	char	**splited;
-	int		*sign_flag;
+    char    *tmp;
+    char    **splited;
+    int        *sign_flag;
 
-	sign_flag = get_sign_flag(game, sign);
-	if (*sign_flag != 0)
-		ft_error(game, "Duplicate element");
-	splited = ft_split(game->file[i], ' ');
-	validate_element(game, splited, &j);
-	tmp = extract_path(game, i, j);
-	assign_path(game, tmp, sign);
-	*sign_flag = 1;
-	free_split_array(splited);
-	free(tmp);
+    sign_flag = get_sign_flag(game, sign);
+    if (*sign_flag != 0)
+        ft_error(game, "Duplicate element");
+    splited = ft_split(game->file[i], ' ');
+    validate_element(game, splited, &j);
+    free_split_array(splited);
+    tmp = extract_path(game, i, j);
+    assign_path(game, tmp, sign);
+    *sign_flag = 1;
+    free(tmp);
 }

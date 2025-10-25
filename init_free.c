@@ -45,6 +45,18 @@ void	init_game(t_data *game)
 	game->llen = NULL;
 	game->bpp = NULL;
 	game->endian = NULL;
+	game->mlx = NULL;
+	game->mlx_win = NULL;
+	game->img = NULL;
+	game->addr = NULL;
+	game->no_tex = NULL;
+	game->so_tex = NULL;
+	game->we_tex = NULL;
+	game->ea_tex = NULL;
+	game->no_texadr = NULL;
+	game->so_texadr = NULL;
+	game->we_texadr = NULL;
+	game->ea_texadr = NULL;
 }
 
 int	ft_destroy(t_data *g)

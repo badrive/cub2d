@@ -12,19 +12,18 @@
 
 #include "../includs/parsing.h"
 
-static int	is_direction_match(char c1, char c2, char dir)
+static int    is_direction_match(char c1, char c2, char dir)
 {
-	if (dir == 'N')
-		return ((c1 == 'N' && c2 == 'O') || c1 == 'N');
-	if (dir == 'S')
-		return ((c1 == 'S' && c2 == 'O') || c1 == 'S');
-	if (dir == 'W')
-		return ((c1 == 'W' && c2 == 'E') || c1 == 'W');
-	if (dir == 'E')
-		return ((c1 == 'E' && c2 == 'A') || c1 == 'E');
-	return (0);
+    if (dir == 'N')
+        return ((c1 == 'N' && c2 == 'O') || (c1 == 'N' && c2 == ' '));
+    if (dir == 'S')
+        return ((c1 == 'S' && c2 == 'O') || (c1 == 'S' && c2 == ' '));
+    if (dir == 'W')
+        return ((c1 == 'W' && c2 == 'E') || (c1 == 'W' && c2 == ' '));
+    if (dir == 'E')
+        return ((c1 == 'E' && c2 == 'A') || (c1 == 'E' && c2 == ' '));
+    return (0);
 }
-
 void	process_element(t_data *game, int i, int j)
 {
 	char	c1;
