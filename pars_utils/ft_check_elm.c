@@ -6,24 +6,25 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:44:07 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/07 21:41:38 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/25 17:04:09 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includs/parsing.h"
 
-static int    is_direction_match(char c1, char c2, char dir)
+static int	is_direction_match(char c1, char c2, char dir)
 {
-    if (dir == 'N')
-        return ((c1 == 'N' && c2 == 'O') || (c1 == 'N' && c2 == ' '));
-    if (dir == 'S')
-        return ((c1 == 'S' && c2 == 'O') || (c1 == 'S' && c2 == ' '));
-    if (dir == 'W')
-        return ((c1 == 'W' && c2 == 'E') || (c1 == 'W' && c2 == ' '));
-    if (dir == 'E')
-        return ((c1 == 'E' && c2 == 'A') || (c1 == 'E' && c2 == ' '));
-    return (0);
+	if (dir == 'N')
+		return ((c1 == 'N' && c2 == 'O') || (c1 == 'N' && c2 == ' '));
+	if (dir == 'S')
+		return ((c1 == 'S' && c2 == 'O') || (c1 == 'S' && c2 == ' '));
+	if (dir == 'W')
+		return ((c1 == 'W' && c2 == 'E') || (c1 == 'W' && c2 == ' '));
+	if (dir == 'E')
+		return ((c1 == 'E' && c2 == 'A') || (c1 == 'E' && c2 == ' '));
+	return (0);
 }
+
 void	process_element(t_data *game, int i, int j)
 {
 	char	c1;

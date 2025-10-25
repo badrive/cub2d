@@ -6,7 +6,7 @@
 /*   By: bfaras <bfaras@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:53:14 by bfaras            #+#    #+#             */
-/*   Updated: 2025/10/07 21:41:09 by bfaras           ###   ########.fr       */
+/*   Updated: 2025/10/25 17:04:57 by bfaras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,30 +77,40 @@ static char	*extract_path(t_data *game, int i, int j)
 
 static void	assign_path(t_data *game, char *tmp, char sign)
 {
+	char	**target;
+
+	target = NULL;
 	if (sign == 'N')
-		game->no = ft_strdup(tmp);
+		target = &game->no;
 	else if (sign == 'S')
-		game->so = ft_strdup(tmp);
+		target = &game->so;
 	else if (sign == 'W')
-		game->we = ft_strdup(tmp);
-	else
-		game->ea = ft_strdup(tmp);
+		target = &game->we;
+	else if (sign == 'E')
+		target = &game->ea;
+	if (!target)
+		return ;
+	if (*target)
+		free(*target);
+	*target = ft_strdup(tmp);
+	if (!*target)
+		ft_error(game, "Memory allocation failed");
 }
 
-void    ft_dup_path(t_data *game, int i, int j, char sign)
+void	ft_dup_path(t_data *game, int i, int j, char sign)
 {
-    char    *tmp;
-    char    **splited;
-    int        *sign_flag;
+	char	*tmp;
+	char	**splited;
+	int		*sign_flag;
 
-    sign_flag = get_sign_flag(game, sign);
-    if (*sign_flag != 0)
-        ft_error(game, "Duplicate element");
-    splited = ft_split(game->file[i], ' ');
-    validate_element(game, splited, &j);
-    free_split_array(splited);
-    tmp = extract_path(game, i, j);
-    assign_path(game, tmp, sign);
-    *sign_flag = 1;
-    free(tmp);
+	sign_flag = get_sign_flag(game, sign);
+	if (*sign_flag != 0)
+		ft_error(game, "Duplicate element");
+	splited = ft_split(game->file[i], ' ');
+	validate_element(game, splited, &j);
+	free_split_array(splited);
+	tmp = extract_path(game, i, j);
+	assign_path(game, tmp, sign);
+	*sign_flag = 1;
+	free(tmp);
 }
